@@ -235,3 +235,4 @@ const Header = () => {
     </Navbar>
   );
 };
+export default Header;
