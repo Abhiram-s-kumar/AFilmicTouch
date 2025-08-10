@@ -1,0 +1,874 @@
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { Container, Row, Col, Button, Image, Card, Carousel, Badge } from 'react-bootstrap';
+import { Fade, Slide, Zoom } from 'react-awesome-reveal';
+import { FaHeart, FaCamera, FaVideo, FaRegCalendarAlt, FaRegClock, FaRegUser, FaStar, FaInstagram, FaPlay, FaArrowRight, FaQuoteLeft } from 'react-icons/fa';
+
+import Blue1 from '../assets/Blue1.jpg';
+import Blue2 from '../assets/Blue2.jpg';
+import Blue3 from '../assets/Blue3.jpg';
+import Blue4 from '../assets/Blue4.jpg';
+import Blue5 from '../assets/Blue5.jpg';
+import Blue6 from '../assets/Blue6.jpg';
+import Blue7 from '../assets/Blue7.jpg';
+import Blue8 from '../assets/Blue8.jpg';
+import Blue9 from '../assets/Blue9.jpg';
+import WeddingImage from '../assets/marrage.jpg';
+
+const WeddingEvents = () => {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const categories = [
+    { id: 'all', name: 'All Events', count: 9 },
+    { id: 'wedding', name: 'Weddings', count: 4 },
+    { id: 'engagement', name: 'Engagement', count: 3 },
+    { id: 'reception', name: 'Receptions', count: 2 }
+  ];
+
+  const services = [
+    {
+      icon: <FaCamera size={50} />,
+      title: 'Wedding Photography',
+      desc: 'Capturing every precious moment from getting ready to the last dance. Documentary and artistic coverage.',
+      features: ['Full Day Coverage', 'Engagement Session', 'Online Gallery', 'Print Rights']
+    },
+    {
+      icon: <FaVideo size={50} />,
+      title: 'Wedding Videography',
+      desc: 'Cinematic wedding films that tell your love story. From highlight reels to full-length documentaries.',
+      features: ['Cinematic Style', 'Drone Coverage', 'Same Day Edit', 'Music Licensing']
+    },
+    {
+      icon: <FaRegCalendarAlt size={50} />,
+      title: 'Event Coverage',
+      desc: 'Engagement parties, rehearsal dinners, bridal showers, and anniversary celebrations.',
+      features: ['Flexible Hours', 'Multiple Locations', 'Quick Delivery', 'Social Media Ready']
+    }
+  ];
+
+  const packages = [
+    {
+      name: 'Essential',
+      price: '$2,500',
+      duration: '8 Hours',
+      features: [
+        'Wedding Photography',
+        '400+ Edited Photos',
+        'Online Gallery',
+        'Print Rights',
+        'Engagement Session'
+      ],
+      popular: false
+    },
+    {
+      name: 'Premium',
+      price: '$4,200',
+      duration: '10 Hours',
+      features: [
+        'Wedding Photography + Video',
+        '600+ Edited Photos',
+        'Cinematic Film',
+        'Drone Coverage',
+        'Second Photographer',
+        'Same Day Edit'
+      ],
+      popular: true
+    },
+    {
+      name: 'Luxury',
+      price: '$6,800',
+      duration: '12 Hours',
+      features: [
+        'Full Coverage Photography',
+        'Feature Film + Highlights',
+        'Drone + Underwater',
+        'Album Design',
+        'Wedding Day Timeline',
+        'Bridal Session'
+      ],
+      popular: false
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: 'Sarah & Michael',
+      date: 'June 2024',
+      text: 'A FILMIC TOUCH captured our wedding day perfectly! Every moment was beautifully documented and the final photos exceeded our expectations.',
+      rating: 5
+    },
+    {
+      name: 'Emma & David',
+      date: 'August 2024',
+      text: 'The video they created for us is absolutely stunning. We watch it every anniversary and it brings back all the emotions of our special day.',
+      rating: 5
+    },
+    {
+      name: 'Jessica & Ryan',
+      date: 'September 2024',
+      text: 'Professional, creative, and so easy to work with. Our wedding photos are magazine-worthy and we couldn\'t be happier!',
+      rating: 5
+    }
+  ];
+
+  const galleryImages = [Blue1, Blue2, Blue3, Blue4, Blue5, Blue6, Blue7, Blue8, Blue9];
+
+  const categoryImages = {
+    all: [Blue1, Blue2, Blue3],
+    wedding: [Blue4, Blue5, Blue6, Blue7],
+    engagement: [Blue8, Blue9, Blue1],
+    reception: [Blue2, Blue3]
+  };
+
+  return (
+    <>
+      <Header />
+      <div style={{ fontFamily: 'Poppins, sans-serif', background: '#fff', color: '#000' }}>
+        {/* Google Fonts Import */}
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+        {/* Hero Section */}
+        <section style={{
+          background: `linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%), url(${WeddingImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Floating Hearts Animation */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none'
+          }}>
+            {[...Array(6)].map((_, i) => (
+              <div key={i} style={{
+                position: 'absolute',
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                color: 'rgba(255,255,255,0.3)',
+                fontSize: `${Math.random() * 20 + 20}px`,
+                animation: `float ${Math.random() * 10 + 10}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 5}s`
+              }}>
+                <FaHeart />
+              </div>
+            ))}
+          </div>
+
+          <Container>
+            <Row className="justify-content-center text-center">
+              <Col lg={10} md={12}>
+                <Fade direction="up" triggerOnce>
+                  <div style={{ position: 'relative', zIndex: 2 }}>
+                    <Badge style={{
+                      background: 'rgba(255,255,255,0.2)',
+                      color: '#fff',
+                      padding: '8px 20px',
+                      borderRadius: 50,
+                      fontSize: '0.9rem',
+                      fontWeight: 500,
+                      marginBottom: 30,
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255,255,255,0.3)'
+                    }}>
+                      <FaHeart style={{ marginRight: 8, color: '#ff6b9d' }} />
+                      Capturing Love Stories Since 2019
+                    </Badge>
+
+                    <h1 style={{ 
+                      fontSize: '5rem', 
+                      fontWeight: 900, 
+                      letterSpacing: '-3px', 
+                      marginBottom: 24,
+                      color: '#fff',
+                      textShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                      lineHeight: 0.9
+                    }}>
+                      Wedding &
+                      <span style={{ 
+                        display: 'block', 
+                        background: 'linear-gradient(45deg, #fff, #ff6b9d)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}>Events</span>
+                    </h1>
+
+                    <p style={{ 
+                      fontSize: '1.4rem', 
+                      fontWeight: 400, 
+                      marginBottom: 40, 
+                      color: '#e0e0e0',
+                      maxWidth: 700,
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                      lineHeight: 1.6
+                    }}>
+                      We specialize in capturing the most precious moments of your special day. 
+                      From intimate ceremonies to grand celebrations, we tell your love story through our lens.
+                    </p>
+
+                    <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap' }}>
+                      <Button style={{ 
+                        background: '#fff', 
+                        color: '#000', 
+                        border: 'none',
+                        fontWeight: 700, 
+                        fontSize: 16, 
+                        padding: '16px 32px', 
+                        borderRadius: 50,
+                        boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.transform = 'translateY(-3px)';
+                        e.target.style.boxShadow = '0 12px 35px rgba(0,0,0,0.3)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = '0 8px 25px rgba(0,0,0,0.2)';
+                      }}
+                      >
+                        Book Your Date <FaArrowRight style={{ marginLeft: 8 }} />
+                      </Button>
+                      
+                      <Button style={{ 
+                        background: 'transparent', 
+                        color: '#fff', 
+                        border: '2px solid #fff',
+                        fontWeight: 600, 
+                        fontSize: 16, 
+                        padding: '16px 32px', 
+                        borderRadius: 50,
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.background = '#fff';
+                        e.target.style.color = '#000';
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.background = 'transparent';
+                        e.target.style.color = '#fff';
+                      }}
+                      >
+                        <FaPlay style={{ marginRight: 8 }} />
+                        Watch Films
+                      </Button>
+                    </div>
+                  </div>
+                </Fade>
+              </Col>
+            </Row>
+          </Container>
+
+          {/* Scroll Indicator */}
+          <div style={{ 
+            position: 'absolute', 
+            bottom: 40, 
+            left: '50%', 
+            transform: 'translateX(-50%)',
+            animation: 'bounce 2s infinite'
+          }}>
+            <div style={{ 
+              width: 40, 
+              height: 40, 
+              border: '2px solid rgba(255,255,255,0.3)', 
+              borderRadius: '50%', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.borderColor = '#fff';
+              e.target.style.transform = 'scale(1.1)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.borderColor = 'rgba(255,255,255,0.3)';
+              e.target.style.transform = 'scale(1)';
+            }}
+            >
+              <span style={{ fontSize: 18, color: '#fff' }}>↓</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section style={{ padding: '100px 0', background: '#f8f9fa' }}>
+          <Container>
+            <Row className="justify-content-center mb-5">
+              <Col lg={8} className="text-center">
+                <Fade direction="up" triggerOnce>
+                  <h2 style={{ 
+                    fontWeight: 800, 
+                    fontSize: '3rem', 
+                    marginBottom: 20,
+                    letterSpacing: '-2px'
+                  }}>
+                    Our Wedding
+                    <span style={{ 
+                      display: 'block', 
+                      background: 'linear-gradient(45deg, #000, #ff6b9d)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Services</span>
+                  </h2>
+                  <p style={{ 
+                    fontSize: '1.2rem', 
+                    color: '#666', 
+                    lineHeight: 1.6,
+                    maxWidth: 600,
+                    margin: '0 auto'
+                  }}>
+                    From engagement sessions to wedding day coverage, we provide comprehensive 
+                    photography and videography services to capture your love story.
+                  </p>
+                </Fade>
+              </Col>
+            </Row>
+
+            <Row className="g-4">
+              {services.map((service, index) => (
+                <Col lg={4} md={6} key={index}>
+                  <Fade direction="up" delay={index * 200} triggerOnce>
+                    <Card style={{
+                      border: 'none',
+                      borderRadius: 24,
+                      boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
+                      transition: 'all 0.4s ease',
+                      height: '100%',
+                      overflow: 'hidden'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-10px)';
+                      e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,0,0,0.08)';
+                    }}
+                    >
+                      <Card.Body style={{ padding: '50px 30px' }}>
+                        <div style={{ 
+                          color: '#ff6b9d', 
+                          marginBottom: 25,
+                          transition: 'all 0.3s ease'
+                        }}>
+                          {service.icon}
+                        </div>
+                        <Card.Title style={{ 
+                          fontWeight: 700, 
+                          fontSize: '1.5rem', 
+                          marginBottom: 15,
+                          color: '#000'
+                        }}>
+                          {service.title}
+                        </Card.Title>
+                        <Card.Text style={{ 
+                          color: '#666', 
+                          fontSize: '1rem',
+                          lineHeight: 1.6,
+                          marginBottom: 25
+                        }}>
+                          {service.desc}
+                        </Card.Text>
+                        <ul style={{ 
+                          listStyle: 'none', 
+                          padding: 0, 
+                          margin: 0,
+                          color: '#666'
+                        }}>
+                          {service.features.map((feature, idx) => (
+                            <li key={idx} style={{ 
+                              marginBottom: 8,
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontSize: '0.9rem'
+                            }}>
+                              <FaHeart style={{ 
+                                color: '#ff6b9d', 
+                                fontSize: '0.8rem', 
+                                marginRight: 10 
+                              }} />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </Card.Body>
+                    </Card>
+                  </Fade>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
+
+        {/* Portfolio Gallery */}
+        <section style={{ padding: '100px 0', background: '#fff' }}>
+          <Container>
+            <Row className="justify-content-center mb-5">
+              <Col lg={8} className="text-center">
+                <Fade direction="up" triggerOnce>
+                  <h2 style={{ 
+                    fontWeight: 800, 
+                    fontSize: '3rem', 
+                    marginBottom: 20,
+                    letterSpacing: '-2px'
+                  }}>
+                    Wedding
+                    <span style={{ 
+                      display: 'block', 
+                      background: 'linear-gradient(45deg, #000, #ff6b9d)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Portfolio</span>
+                  </h2>
+                </Fade>
+              </Col>
+            </Row>
+
+            {/* Filter Buttons */}
+            <Row className="justify-content-center mb-5">
+              <Col lg={8} className="text-center">
+                <Fade direction="up" delay={200} triggerOnce>
+                  <div style={{ display: 'flex', gap: 15, justifyContent: 'center', flexWrap: 'wrap' }}>
+                    {categories.map((category) => (
+                      <Button
+                        key={category.id}
+                        variant={activeCategory === category.id ? 'dark' : 'outline-dark'}
+                        onClick={() => setActiveCategory(category.id)}
+                        style={{
+                          borderRadius: 50,
+                          padding: '12px 24px',
+                          fontWeight: 600,
+                          fontSize: '0.9rem',
+                          border: '2px solid #000',
+                          transition: 'all 0.3s ease',
+                          fontFamily: 'Poppins, sans-serif'
+                        }}
+                      >
+                        {category.name} ({category.count})
+                      </Button>
+                    ))}
+                  </div>
+                </Fade>
+              </Col>
+            </Row>
+
+            {/* Gallery Grid */}
+            <Row className="g-4">
+              {categoryImages[activeCategory].map((img, idx) => (
+                <Col key={idx} xs={12} sm={6} md={4} lg={4}>
+                  <Fade direction="up" delay={idx * 100} triggerOnce>
+                    <div style={{
+                      position: 'relative',
+                      borderRadius: 20,
+                      overflow: 'hidden',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                      transition: 'all 0.4s ease',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={() => setHoveredIndex(idx)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      <Image
+                        src={img}
+                        style={{
+                          width: '100%',
+                          height: '350px',
+                          objectFit: 'cover',
+                          transition: 'all 0.4s ease',
+                          filter: hoveredIndex === idx ? 'grayscale(0%) brightness(1.1)' : 'grayscale(100%)',
+                          transform: hoveredIndex === idx ? 'scale(1.05)' : 'scale(1)'
+                        }}
+                        fluid
+                      />
+                      {/* Overlay */}
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%)',
+                        opacity: hoveredIndex === idx ? 1 : 0,
+                        transition: 'all 0.4s ease',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                        <div style={{ textAlign: 'center', color: '#fff' }}>
+                          <h5 style={{ fontWeight: 600, marginBottom: 10 }}>Wedding {idx + 1}</h5>
+                          <p style={{ fontSize: '0.9rem', opacity: 0.9 }}>View Gallery</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Fade>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
+        
+        {/* Packages Section */}
+        <section style={{ padding: '100px 0', background: '#000', color: '#fff' }}>
+          <Container>
+            <Row className="justify-content-center mb-5">
+              <Col lg={8} className="text-center">
+                <Fade direction="up" triggerOnce>
+                  <h2 style={{ 
+                    fontWeight: 800, 
+                    fontSize: '3rem', 
+                    marginBottom: 20,
+                    letterSpacing: '-2px'
+                  }}>
+                    Wedding
+                    <span style={{ 
+                      display: 'block', 
+                      background: 'linear-gradient(45deg, #fff, #ff6b9d)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Packages</span>
+                  </h2>
+                  <p style={{ 
+                    fontSize: '1.2rem', 
+                    color: '#ccc', 
+                    lineHeight: 1.6,
+                    maxWidth: 600,
+                    margin: '0 auto'
+                  }}>
+                    Choose the perfect package for your special day. All packages include consultation, 
+                    timeline planning, and professional editing.
+                  </p>
+                </Fade>
+              </Col>
+            </Row>
+
+            <Row className="g-4">
+              {packages.map((pkg, index) => (
+                <Col lg={4} md={6} key={index}>
+                  <Fade direction="up" delay={index * 200} triggerOnce>
+                    <Card style={{
+                      background: pkg.popular ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : 'rgba(255,255,255,0.05)',
+                      border: pkg.popular ? 'none' : '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: 24,
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.4s ease',
+                      height: '100%',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-10px)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                    >
+                      {pkg.popular && (
+                        <div style={{
+                          position: 'absolute',
+                          top: 20,
+                          right: 20,
+                          background: '#fff',
+                          color: '#ff6b9d',
+                          padding: '4px 12px',
+                          borderRadius: 20,
+                          fontSize: '0.8rem',
+                          fontWeight: 600
+                        }}>
+                          Most Popular
+                        </div>
+                      )}
+                      
+                      <Card.Body style={{ padding: '50px 30px', textAlign: 'center' }}>
+                        <h3 style={{ 
+                          fontWeight: 700, 
+                          fontSize: '1.8rem', 
+                          marginBottom: 10,
+                          color: pkg.popular ? '#fff' : '#fff'
+                        }}>
+                          {pkg.name}
+                        </h3>
+                        <div style={{ marginBottom: 30 }}>
+                          <span style={{ 
+                            fontSize: '3rem', 
+                            fontWeight: 900,
+                            color: pkg.popular ? '#fff' : '#fff'
+                          }}>
+                            {pkg.price}
+                          </span>
+                          <div style={{ 
+                            fontSize: '1rem',
+                            color: pkg.popular ? 'rgba(255,255,255,0.8)' : '#ccc'
+                          }}>
+                            {pkg.duration} Coverage
+                          </div>
+                        </div>
+                        
+                        <ul style={{ 
+                          listStyle: 'none', 
+                          padding: 0, 
+                          margin: '0 0 30px 0',
+                          textAlign: 'left'
+                        }}>
+                          {pkg.features.map((feature, idx) => (
+                            <li key={idx} style={{ 
+                              marginBottom: 12,
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontSize: '0.95rem',
+                              color: pkg.popular ? 'rgba(255,255,255,0.9)' : '#ccc'
+                            }}>
+                              <FaHeart style={{ 
+                                color: pkg.popular ? '#fff' : '#ff6b9d', 
+                                fontSize: '0.8rem', 
+                                marginRight: 12,
+                                flexShrink: 0
+                              }} />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                        
+                        <Button 
+                          variant={pkg.popular ? 'light' : 'outline-light'}
+                          size="lg"
+                          style={{
+                            borderRadius: 50,
+                            padding: '12px 30px',
+                            fontWeight: 600,
+                            width: '100%',
+                            transition: 'all 0.3s ease'
+                          }}
+                        >
+                          Choose Package
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </Fade>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
+
+        {/* Testimonials Section */}
+        <section style={{ padding: '100px 0', background: '#f8f9fa' }}>
+          <Container>
+            <Row className="justify-content-center mb-5">
+              <Col lg={8} className="text-center">
+                <Fade direction="up" triggerOnce>
+                  <h2 style={{ 
+                    fontWeight: 800, 
+                    fontSize: '3rem', 
+                    marginBottom: 20,
+                    letterSpacing: '-2px'
+                  }}>
+                    Happy
+                    <span style={{ 
+                      display: 'block', 
+                      background: 'linear-gradient(45deg, #000, #ff6b9d)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Couples</span>
+                  </h2>
+                </Fade>
+              </Col>
+            </Row>
+
+            <Row className="g-4">
+              {testimonials.map((testimonial, index) => (
+                <Col lg={4} md={6} key={index}>
+                  <Fade direction="up" delay={index * 200} triggerOnce>
+                    <Card style={{
+                      border: 'none',
+                      borderRadius: 20,
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
+                      transition: 'all 0.3s ease',
+                      height: '100%'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-5px)';
+                      e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.12)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                    }}
+                    >
+                      <Card.Body style={{ padding: '40px 30px' }}>
+                        <div style={{ 
+                          color: '#ff6b9d', 
+                          fontSize: '2rem', 
+                          marginBottom: 20 
+                        }}>
+                          <FaQuoteLeft />
+                        </div>
+                        
+                        <Card.Text style={{ 
+                          fontSize: '1rem',
+                          lineHeight: 1.6,
+                          color: '#666',
+                          marginBottom: 25,
+                          fontStyle: 'italic'
+                        }}>
+                          "{testimonial.text}"
+                        </Card.Text>
+                        
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <div>
+                            <h6 style={{ 
+                              fontWeight: 600, 
+                              margin: 0, 
+                              color: '#000',
+                              fontSize: '1rem'
+                            }}>
+                              {testimonial.name}
+                            </h6>
+                            <small style={{ color: '#999' }}>{testimonial.date}</small>
+                          </div>
+                          <div style={{ display: 'flex', gap: 2 }}>
+                            {[...Array(testimonial.rating)].map((_, i) => (
+                              <FaStar key={i} style={{ color: '#ff6b9d', fontSize: '0.9rem' }} />
+                            ))}
+                          </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Fade>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
+
+        {/* CTA Section */}
+        <section style={{ 
+          padding: '100px 0', 
+          background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)',
+          color: '#fff',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <Container>
+            <Row className="justify-content-center">
+              <Col lg={8} className="text-center">
+                <Fade direction="up" triggerOnce>
+                  <h2 style={{ 
+                    fontWeight: 800, 
+                    fontSize: '3rem', 
+                    marginBottom: 20,
+                    letterSpacing: '-2px'
+                  }}>
+                    Ready to Capture
+                    <span style={{ 
+                      display: 'block', 
+                      background: 'linear-gradient(45deg, #fff, #f0f0f0)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>Your Love Story?</span>
+                  </h2>
+                  <p style={{ 
+                    fontSize: '1.2rem', 
+                    color: 'rgba(255,255,255,0.9)', 
+                    marginBottom: 40,
+                    lineHeight: 1.6
+                  }}>
+                    Let's discuss your wedding vision and create a custom package that perfectly fits your needs.
+                  </p>
+                  <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <Button style={{ 
+                      background: '#fff', 
+                      color: '#ff6b9d', 
+                      border: 'none',
+                      fontWeight: 700, 
+                      fontSize: 16, 
+                      padding: '16px 32px', 
+                      borderRadius: 50,
+                      boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      e.target.style.transform = 'translateY(-3px)';
+                      e.target.style.boxShadow = '0 12px 35px rgba(0,0,0,0.3)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.boxShadow = '0 8px 25px rgba(0,0,0,0.2)';
+                    }}
+                    >
+                      Book Consultation <FaArrowRight style={{ marginLeft: 8 }} />
+                    </Button>
+                    
+                    <Button style={{ 
+                      background: 'transparent', 
+                      color: '#fff', 
+                      border: '2px solid #fff',
+                      fontWeight: 600, 
+                      fontSize: 16, 
+                      padding: '16px 32px', 
+                      borderRadius: 50,
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      e.target.style.background = '#fff';
+                      e.target.style.color = '#ff6b9d';
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.background = 'transparent';
+                      e.target.style.color = '#fff';
+                    }}
+                    >
+                      View Full Gallery
+                    </Button>
+                  </div>
+                </Fade>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+
+        <Footer />
+
+        {/* Custom CSS */}
+        <style>{`
+          @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+          }
+          
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+          }
+          
+          @media (max-width: 768px) {
+            h1 { font-size: 3rem !important; }
+            h2 { font-size: 2rem !important; }
+          }
+        `}</style>
+      </div>
+    </>
+  );
+};
+
+export default WeddingEvents;

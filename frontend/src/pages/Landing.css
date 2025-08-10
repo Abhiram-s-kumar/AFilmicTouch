@@ -1,0 +1,97 @@
+/* src/pages/Home.css */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+.home-section {
+  height: 100vh;
+  background-color: #fff;
+  color: #000;
+  font-family: 'Cinzel', serif;
+  overflow: hidden;
+}
+
+.brand-name {
+  font-size: 6rem;
+  letter-spacing: 0.5rem;
+  position: relative;
+  animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+.brand-name::before,
+.brand-name::after {
+  content: "✦";
+  position: absolute;
+  top: -40px;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.brand-name::before {
+  left: 35%;
+  animation: sparkle 2s infinite ease-in-out;
+}
+.brand-name::after {
+  right: 35%;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.2rem;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fade-in 2s ease 2s forwards;
+}
+
+
+.social-icons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.social-icons a {
+  color: #000;
+  font-size: 1.7rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  opacity: 0.85;
+}
+
+.social-icons a:hover {
+  color: #000;
+  transform: scale(1.2);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: 0.5rem;
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
